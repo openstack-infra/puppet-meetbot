@@ -7,6 +7,15 @@ class meetbot {
     source   => 'https://git.openstack.org/openstack-infra/meetbot',
   }
 
+  vcsrepo { '/opt/ubuntu_supybot_plugins':
+    ensure   => latest,
+    provider => bzr,
+    require  => [
+      Package['bzr'],
+    ],
+    source   => 'lp:ubuntu-bots'
+  }
+
   user { 'meetbot':
     gid     => 'meetbot',
     home    => '/var/lib/meetbot',
@@ -21,6 +30,9 @@ class meetbot {
 
   $packages = [
     'supybot',
+    'bzr',
+    'python-launchpadlib',
+    'python-soappy',
     'python-twisted'
   ]
 
@@ -42,6 +54,16 @@ class meetbot {
       Vcsrepo['/opt/meetbot']
     ],
     source  => '/opt/meetbot/MeetBot',
+  }
+
+  file { '/usr/share/pyshared/supybot/plugins/Bugtracker':
+    ensure  => directory,
+    recurse => true,
+    require => [
+      Package['supybot'],
+      Vcsrepo['/opt/ubuntu_supybot_plugins']
+    ],
+    source  => '/opt/supybot/plugins/Bugtracker',
   }
 }
 
