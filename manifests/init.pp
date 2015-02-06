@@ -63,7 +63,7 @@ class meetbot {
       Package['supybot'],
       Vcsrepo['/opt/ubuntu_supybot_plugins']
     ],
-    source  => '/opt/supybot/plugins/Bugtracker',
+    source  => '/opt/ubuntu_supybot_plugins/Bugtracker',
   }
 }
 
