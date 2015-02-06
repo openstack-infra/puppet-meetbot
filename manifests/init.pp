@@ -8,7 +8,7 @@ class meetbot {
   }
 
   vcsrepo { '/opt/ubuntu_supybot_plugins':
-    ensure   => latest,
+    ensure   => present,
     provider => bzr,
     require  => [
       Package['bzr'],
