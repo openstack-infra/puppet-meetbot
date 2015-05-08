@@ -40,6 +40,11 @@ class meetbot {
     ensure => present,
   }
 
+  package { 'irclog2html':
+    ensure   => 'present',
+    provider => pip,
+  }
+
   file { '/var/lib/meetbot':
     ensure  => directory,
     owner   => 'meetbot',
