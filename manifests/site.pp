@@ -93,6 +93,15 @@ define meetbot::site(
     require => File["${varlib}/ircmeeting"],
   }
 
+  cron { 'irclog2html':
+    user        => 'meetbot',
+    weekday     => '*',
+    hour        => '*',
+    minute      => '*/15',
+    command     => "find ${varlib}/logs/ChannelLogger/${network} -mindepth 1 -maxdepth 1 -type d | xargs -n1 logs2html",
+    environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
+  }
+
 # we set this file as root ownership because meetbot overwrites it on shutdown
 # this means when puppet changes it and restarts meetbot the file is reset
   file { "/etc/init/${name}-meetbot.conf":
