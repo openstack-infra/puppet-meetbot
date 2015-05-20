@@ -7,6 +7,7 @@ define meetbot::site(
   $use_ssl,
   $vhost_name = $::fqdn,
   $vhost_extra = '',
+  $manage_index = true,
 ) {
 
   $varlib = "/var/lib/meetbot/${name}"
@@ -29,10 +30,12 @@ define meetbot::site(
     ensure => directory,
   }
 
-  file { "${meetbot}/index.html":
-    ensure  => present,
-    content => template('meetbot/index.html.erb'),
-    require => File[$meetbot],
+  if manage_index == true {
+    file { "${meetbot}/index.html":
+      ensure  => present,
+      content => template('meetbot/index.html.erb'),
+      require => File[$meetbot],
+    }
   }
 
   file { "${meetbot}/irclogs":
