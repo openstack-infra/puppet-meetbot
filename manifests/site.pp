@@ -13,7 +13,7 @@ define meetbot::site(
   $varlib = "/var/lib/meetbot/${name}"
   $meetbot = "/srv/meetbot-${name}"
 
-  apache::vhost { $vhost_name:
+  httpd::vhost { $vhost_name:
     port     => 80,
     docroot  => "/srv/meetbot-${name}",
     priority => '50',

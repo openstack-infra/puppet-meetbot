@@ -1,5 +1,5 @@
 class meetbot {
-  include apache
+  include httpd
 
   vcsrepo { '/opt/meetbot':
     ensure   => latest,
