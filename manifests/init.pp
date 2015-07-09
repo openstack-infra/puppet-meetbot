@@ -1,5 +1,11 @@
 class meetbot {
-  include apache
+  # NOTE(pabelanger): Until we full remove puppetlabs-apache from
+  # system-config, we need to do this hack to avoid a circular dependency.
+  if ! defined(Class['apache']) {
+    include httpd
+  } else {
+    include apache
+  }
 
   vcsrepo { '/opt/meetbot':
     ensure   => latest,
