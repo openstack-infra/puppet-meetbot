@@ -6,7 +6,7 @@ define meetbot::site(
   $server,
   $use_ssl,
   $vhost_name = $::fqdn,
-  $vhost_extra = '',
+  $vhost_extra = undef,
   $manage_index = true,
 ) {
 
