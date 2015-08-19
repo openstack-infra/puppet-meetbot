@@ -13,22 +13,11 @@ define meetbot::site(
   $varlib = "/var/lib/meetbot/${name}"
   $meetbot = "/srv/meetbot-${name}"
 
-  # NOTE(pabelanger): Until we full remove puppetlabs-apache from
-  # system-config, we need to do this hack to avoid a circular dependency.
-  if ! defined(Class['::apache']) {
-    ::httpd::vhost { $vhost_name:
-      port     => 80,
-      docroot  => "/srv/meetbot-${name}",
-      priority => '50',
-      template => 'meetbot/vhost.erb',
-    }
-  } else {
-    ::apache::vhost { $vhost_name:
-      port     => 80,
-      docroot  => "/srv/meetbot-${name}",
-      priority => '50',
-      template => 'meetbot/vhost.erb',
-    }
+  ::httpd::vhost { $vhost_name:
+    port     => 80,
+    docroot  => "/srv/meetbot-${name}",
+    priority => '50',
+    template => 'meetbot/vhost.erb',
   }
 
   file { $varlib:
