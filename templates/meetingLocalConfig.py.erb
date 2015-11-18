@@ -3,3 +3,7 @@ class Config(object):
     logFileDir = '/var/lib/meetbot/<%= name %>/meetings/'
     logUrlPrefix = 'http://<%= vhost_name %>/meetings/'
     filenamePattern = '%(meetingname)s/%%Y/%(meetingname)s.%%F-%%H.%%M'
+    unoffical_is_fatal = False
+    offical_channels = ('#openstack-meeting', '#openstack-meeting-alt',
+                        '#openstack-meeting-3', '#openstack-meeting-4')
+    
