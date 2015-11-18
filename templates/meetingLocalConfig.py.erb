@@ -3,3 +3,9 @@ class Config(object):
     logFileDir = '/var/lib/meetbot/<%= name %>/meetings/'
     logUrlPrefix = 'http://<%= vhost_name %>/meetings/'
     filenamePattern = '%(meetingname)s/%%Y/%(meetingname)s.%%F-%%H.%%M'
+    offical_channels = ('#openstack-meeting', '#openstack-meeting-alt',
+                        '#openstack-meeting-3', '#openstack-meeting-4')
+    unoffical_is_fatal = False
+    unofficial_channel_msg = ("WARNING: You're starting a meeting in an "
+                              "unsupported channel.  The ability to do "
+                              "this will cease with the Mitaka release.")
