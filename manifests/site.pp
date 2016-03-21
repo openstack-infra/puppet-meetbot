@@ -5,8 +5,8 @@ define meetbot::site(
   $nickpass,
   $server,
   $use_ssl,
-  $vhost_name = $::fqdn,
-  $vhost_extra = undef,
+  $vhost_name   = $::fqdn,
+  $vhost_extra  = undef,
   $manage_index = true,
 ) {
 
