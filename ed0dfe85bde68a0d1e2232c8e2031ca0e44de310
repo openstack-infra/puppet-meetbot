@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <yolanda.robla-mota@hpe.com>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Workflow+1: Spencer Krum <nibz@spencerkrum.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 06 May 2016 03:59:47 +0000
+Reviewed-on: https://review.openstack.org/295280
+Project: openstack-infra/puppet-meetbot
+Branch: refs/heads/master
