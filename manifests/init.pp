@@ -19,7 +19,7 @@ class meetbot {
   user { 'meetbot':
     gid     => 'meetbot',
     home    => '/var/lib/meetbot',
-    shell   => '/sbin/nologin',
+    shell   => '/usr/sbin/nologin',
     system  => true,
     require => Group['meetbot'],
   }
