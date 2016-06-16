@@ -50,7 +50,7 @@ class meetbot {
 
   package { 'irclog2html':
     ensure   => 'present',
-    provider => pip,
+    provider => openstack_pip,
   }
 
   file { '/var/lib/meetbot':
