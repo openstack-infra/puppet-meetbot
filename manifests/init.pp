@@ -1,5 +1,6 @@
 class meetbot {
-    include ::httpd
+  include ::httpd
+  include ::meetbot::params
 
   # The Apache mod_version module only needs to be enabled on Ubuntu 12.04
   # as it comes compiled and enabled by default on newer OS, including CentOS
@@ -59,7 +60,7 @@ class meetbot {
     require => User['meetbot'],
   }
 
-  file { '/usr/share/pyshared/supybot/plugins/MeetBot':
+  file { "${::meetbot::params::plugins_dir}/supybot/plugins/MeetBot":
     ensure  => directory,
     recurse => true,
     require => [
@@ -69,7 +70,7 @@ class meetbot {
     source  => '/opt/meetbot/MeetBot',
   }
 
-  file { '/usr/share/pyshared/supybot/plugins/Bugtracker':
+  file { "${::meetbot::params::plugins_dir}/supybot/plugins/Bugtracker":
     ensure  => directory,
     recurse => true,
     require => [

@@ -9,6 +9,7 @@ define meetbot::site(
   $vhost_name   = $::fqdn,
   $manage_index = true,
 ) {
+  include ::meetbot::params
 
   $varlib = "/var/lib/meetbot/${name}"
   $meetbot = "/srv/meetbot-${name}"
@@ -123,7 +124,7 @@ define meetbot::site(
       File["/etc/init/${name}-meetbot.conf"]
     ],
     subscribe => [
-      File['/usr/share/pyshared/supybot/plugins/MeetBot'],
+      File["${::meetbot::params::plugins_dir}/supybot/plugins/MeetBot"],
       File["${varlib}/ircmeeting"]
     ],
   }
