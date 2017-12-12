@@ -58,8 +58,12 @@ class meetbot {
     owner   => 'meetbot',
     require => User['meetbot'],
   }
+  $plugins_dir = $::lsbdistcodename ? {
+    'xenial' => '/usr/lib/python2.7/dist-packages',
+    default  => '/usr/share/pyshared',
+  }
 
-  file { '/usr/share/pyshared/supybot/plugins/MeetBot':
+  file { "${plugins_dir}/supybot/plugins/MeetBot":
     ensure  => directory,
     recurse => true,
     require => [
@@ -69,7 +73,7 @@ class meetbot {
     source  => '/opt/meetbot/MeetBot',
   }
 
-  file { '/usr/share/pyshared/supybot/plugins/Bugtracker':
+  file { "${plugins_dir}/supybot/plugins/Bugtracker":
     ensure  => directory,
     recurse => true,
     require => [

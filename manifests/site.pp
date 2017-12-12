@@ -123,7 +123,7 @@ define meetbot::site(
       File["/etc/init/${name}-meetbot.conf"]
     ],
     subscribe => [
-      File['/usr/share/pyshared/supybot/plugins/MeetBot'],
+      Vcsrepo['/opt/meetbot'],
       File["${varlib}/ircmeeting"]
     ],
   }
