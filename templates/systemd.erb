@@ -1,0 +1,14 @@
+[Unit]
+Description=<%= @name %> Meetbot Server
+After=network.target
+
+[Service]
+Type=simple
+Environment=PYTHONPATH=/var/lib/meetbot/<%= @name %>
+Group=meetbot
+User=meetbot
+WorkingDirectory=/var/lib/meetbot/<%= @name %>
+ExecStart=/usr/bin/python /usr/bin/supybot /var/lib/meetbot/<%= @name %>.conf
+
+[Install]
+WantedBy=multi-user.target
