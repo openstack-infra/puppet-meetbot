@@ -106,11 +106,18 @@ define meetbot::site(
     environment => 'PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin',
   }
 
-# we set this file as root ownership because meetbot overwrites it on shutdown
-# this means when puppet changes it and restarts meetbot the file is reset
-  file { "/etc/init/${name}-meetbot.conf":
+  if ($::meetbot::params::initd == 'upstart') {
+    $initd_path = "/etc/init/${name}-meetbot.conf"
+  } else {
+    $initd_path = "/etc/systemd/system/${name}-meetbot.service"
+  }
+
+  # we set this file as root ownership because meetbot overwrites it on shutdown
+  # this means when puppet changes it and restarts meetbot the file is reset
+  file { "${name}-initd":
     ensure  => present,
-    content => template('meetbot/upstart.erb'),
+    path    => $initd_path,
+    content => template("meetbot/${::meetbot::params::initd}.erb"),
     notify  => Service["${name}-meetbot"],
     owner   => 'root',
     replace => true,
@@ -118,10 +125,10 @@ define meetbot::site(
   }
 
   service { "${name}-meetbot":
-    provider  => upstart,
+    provider  => $::meetbot::params::initd,
     require   => [
       Vcsrepo['/opt/meetbot'],
-      File["/etc/init/${name}-meetbot.conf"]
+      File["${name}-initd"]
     ],
     subscribe => [
       File["${::meetbot::params::plugins_dir}/supybot/plugins/MeetBot"],
