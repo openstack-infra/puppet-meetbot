@@ -5,4 +5,8 @@ class meetbot::params {
     'xenial' => '/usr/lib/python2.7/dist-packages',
     default  => '/usr/share/pyshared',
   }
+  $initd = $::lsbdistcodename ? {
+    'trusty' => 'upstart',
+    default  => 'systemd',
+  }
 }
