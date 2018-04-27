@@ -14,11 +14,22 @@ define meetbot::site(
   $varlib = "/var/lib/meetbot/${name}"
   $meetbot = "/srv/meetbot-${name}"
 
-  ::httpd::vhost { $vhost_name:
-    port     => 80,
-    docroot  => "/srv/meetbot-${name}",
-    priority => '50',
-    template => 'meetbot/vhost.erb',
+  $port = 80
+  $docroot = "/srv/meetbot-${name}"
+  $srvname = $vhost_name
+  $options = 'Indexes FollowSymLinks MultiViews'
+  if defined(Class['::apache']) {
+    ::apache::vhost::custom { $vhost_name:
+      priority => '50',
+      content  => template('meetbot/vhost.erb'),
+    }
+  } else {
+     ::httpd::vhost { $vhost_name:
+       port     => 80,
+       docroot  => "/srv/meetbot-${name}",
+       priority => '50',
+       template => 'meetbot/vhost.erb',
+     }
   }
 
   file { $varlib:
