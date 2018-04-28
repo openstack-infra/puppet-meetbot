@@ -1,0 +1,17 @@
+---
+- name: Install puppet
+  command: install_puppet.sh
+  args:
+    chdir: "{{ zuul.projects['git.openstack.org/openstack-infra/system-config'].src_dir }}"
+- name: Install modules
+  command: tools/install_modules_acceptance.sh
+  args:
+    chdir: "{{ zuul.projects['git.openstack.org/openstack-infra/system-config'].src_dir }}"
+- name: Run puppet apply
+  command: PATH=$PATH:/opt/puppetlabs/bin puppet apply tests/fixtures/default.pp
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+- name: Check results
+  command: ./tests/run-tests.sh
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
