@@ -1,0 +1,19 @@
+---
+- name: Install puppet
+  command: ./install_puppet.sh
+  args:
+    chdir: "{{ zuul.projects['git.openstack.org/openstack-infra/system-config'].src_dir }}"
+  become: yes
+- name: Install modules
+  command: ./tools/install_modules_acceptance.sh
+  args:
+    chdir: "{{ zuul.projects['git.openstack.org/openstack-infra/system-config'].src_dir }}"
+  become: yes
+- name: Test scenarios
+  include: scenario.yml
+    vars:
+      scenario: "{{ item }}"
+  args:
+    chdir: "{{ zuul.project.src_dir }}"
+  with_fileglob:
+    - ./tests/scenarios/*
