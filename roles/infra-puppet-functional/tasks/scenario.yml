@@ -1,0 +1,13 @@
+---
+- name: Run puppet apply
+  command: env PATH=$PATH:/opt/puppetlabs/bin puppet apply {{ scenario }}/manifest.pp
+  become: yes
+  register: puppet_result
+  failed_when: puppet_result.rc != 2
+- name: Run puppet apply again to check for idempotence
+  command: env PATH=$PATH:/opt/puppetlabs/bin puppet apply {{ scenario }}/manifest.pp
+  become: yes
+  register: puppet_result
+  failed_when: puppet_result.rc != 0
+- name: Check results
+  command: ./{{ scenario }}/tests.sh
