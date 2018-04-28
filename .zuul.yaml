@@ -1,0 +1,7 @@
+- project:
+  check:
+    jobs:
+      - puppet-meetbot-functional
+- job:
+    name: puppet-meetbot-functional
+    run: playbooks/puppet-meetbot-functional.yaml
