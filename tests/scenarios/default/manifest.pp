@@ -1,7 +1,5 @@
-include httpd
-httpd::mod { 'headers':
-  ensure => present,
-}
+include apache
+include apache::mod::headers
 
 include meetbot
 $vhost_extra = '
