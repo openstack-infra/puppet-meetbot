@@ -31,7 +31,7 @@ define meetbot::site(
     ensure => directory,
   }
 
-  if manage_index == true {
+  if $manage_index == true {
     file { "${meetbot}/index.html":
       ensure  => present,
       content => template('meetbot/index.html.erb'),
