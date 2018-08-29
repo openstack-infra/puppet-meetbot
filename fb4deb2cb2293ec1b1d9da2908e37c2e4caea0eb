@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 29 Aug 2018 01:36:55 +0000
+Reviewed-on: https://review.openstack.org/596398
+Project: openstack-infra/puppet-meetbot
+Branch: refs/heads/master
