@@ -145,6 +145,7 @@ define meetbot::site(
       File["${::meetbot::params::plugins_dir}/supybot/plugins/MeetBot"],
       File["${varlib}/ircmeeting"]
     ],
+    enable => true,
   }
 }
 
