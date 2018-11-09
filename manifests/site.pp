@@ -137,6 +137,7 @@ define meetbot::site(
 
   service { "${name}-meetbot":
     provider  => $::meetbot::params::initd,
+    enable    => true,
     require   => [
       Vcsrepo['/opt/meetbot'],
       File["${name}-initd"]
