@@ -1,5 +1,3 @@
-# OpenStack Meetbot Module
+# This repo has moved to OpenDev
 
-## Overview
-
-Configures MeetBot.
+It can now be found at [https://opendev.org/opendev/puppet-meetbot](https://opendev.org/opendev/puppet-meetbot)
